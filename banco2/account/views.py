@@ -5,6 +5,7 @@ from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework import viewsets
 from .models import CuentaCorriente
 from django.contrib.auth import get_user_model
+from rest_framework.views import APIView
 from .serializers import CuentaSerializer, UserSerializer
 usuario = get_user_model()
 
@@ -14,6 +15,12 @@ usuario = get_user_model()
 class CuentaViewSet(viewsets.ModelViewSet):
     queryset = CuentaCorriente.objects.all()
     serializer_class = CuentaSerializer
+
+    def get_queryset(self):
+        # Filtrar las cuentas bancarias del usuario logueado
+
+        user = self.request.user
+        return user.ahorros.all()
 
 
 # CODIGO QUE CHATGPT PROPORCIONÓ PARA OBTENER ID DE USUARIO LOGGEADO, ABERIGUAR SOBRE ESTO EN GOOGLE
@@ -31,24 +38,28 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
-@authentication_classes([JWTAuthentication])
-@permission_classes([IsAuthenticated])
-class TransferenciaViewSet(viewsets.ModelViewSet):
-    queryset = CuentaCorriente.objects.none()
-    serializer_class = CuentaSerializer
+class TransferenciaAPIView(APIView):
 
-    def create(self, request, *args, **kwargs):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+
+    def post(self, request, *args, **kwargs):
         usuario_origen_id = request.user.id
         usuario_destino_id = request.data.get('usuario_destino_id')
         cantidad = request.data.get('cantidad')
+        moneda = request.data.get('moneda')
 
         cuenta_origen = CuentaCorriente.objects.filter(
-            user_id=usuario_origen_id).first()
+            user_id=usuario_origen_id, moneda=moneda).first()
         cuenta_destino = CuentaCorriente.objects.filter(
-            user_id=usuario_destino_id).first()
+            user_id=usuario_destino_id, moneda=moneda).first()
+        print(cuenta_origen)
 
         if not cuenta_origen:
             return Response({'error': 'Cuenta de origen no encontrada'}, status=400)
+
+        if not moneda:
+            return Response({'error': 'debes seleccionar una moneda'}, status=400)
 
         if not cuenta_destino:
             return Response({'error': 'Cuenta de destino no encontrada'}, status=400)
