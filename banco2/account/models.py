@@ -14,3 +14,17 @@ class CuentaCorriente(models.Model):
 
     def __str__(self):
         return 'cuenta de ' + self.user.username + ' en ' + self.moneda
+
+
+class Transferencia(models.Model):
+    cuenta_origen = models.ForeignKey(
+        CuentaCorriente, related_name='transferencias_enviadas', on_delete=models.CASCADE
+    )
+    cuenta_destino = models.ForeignKey(
+        CuentaCorriente, related_name='transferencias_recibidas', on_delete=models.CASCADE
+    )
+    cantidad = models.IntegerField()
+    fecha = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Transferencia de {self.cuenta_origen.user.username} a {self.cuenta_destino.user.username}'

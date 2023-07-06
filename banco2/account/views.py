@@ -3,10 +3,11 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework import viewsets
-from .models import CuentaCorriente
+from .models import CuentaCorriente, Transferencia
 from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
-from .serializers import CuentaSerializer, UserSerializer
+from rest_framework import status
+from .serializers import CuentaSerializer, UserSerializer, RegistroSerializer
 usuario = get_user_model()
 
 
@@ -24,6 +25,7 @@ class CuentaViewSet(viewsets.ModelViewSet):
 
 
 # CODIGO QUE CHATGPT PROPORCIONÓ PARA OBTENER ID DE USUARIO LOGGEADO, ABERIGUAR SOBRE ESTO EN GOOGLE
+
 
     def list(self, request, *args, **kwargs):
         user_id = request.user.id
@@ -73,4 +75,29 @@ class TransferenciaAPIView(APIView):
         cuenta_origen.save()
         cuenta_destino.save()
 
-        return Response({'message': 'Transferencia exitosa'})
+        transferencia = Transferencia.objects.create(
+            cuenta_origen=cuenta_origen,
+            cuenta_destino=cuenta_destino,
+            cantidad=cantidad
+        )
+
+        serializer = RegistroSerializer(transferencia)
+        return Response(serializer.data, status=201)
+
+    def get(self, request, *args, **kwargs):
+        usuario = request.user.id
+
+        transferencias = Transferencia.objects.filter(
+            cuenta_origen=usuario)
+
+        serializer = RegistroSerializer(transferencias, many=True)
+        return Response(serializer.data, status=200)
+
+
+class UserCreateAPIView(APIView):
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
