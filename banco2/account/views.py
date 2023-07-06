@@ -1,3 +1,4 @@
+
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -27,18 +28,17 @@ class CuentaViewSet(viewsets.ModelViewSet):
 
 # CODIGO QUE CHATGPT PROPORCIONÓ PARA OBTENER ID DE USUARIO LOGGEADO, ABERIGUAR SOBRE ESTO EN GOOGLE
 
-
-    def list(self, request, *args, **kwargs):
+    """ def list(self, request, *args, **kwargs):
         user_id = request.user.id
         print(f"User ID: {user_id}")
-        return super().list(request, *args, **kwargs)
+        return super().list(request, *args, **kwargs) """
 
 
-@authentication_classes([JWTAuthentication])
+""" @authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 class UserViewSet(viewsets.ModelViewSet):
     queryset = usuario.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserSerializer """
 
 
 class TransferenciaAPIView(APIView):

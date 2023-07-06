@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import CuentaCorriente, Transferencia
 from django.contrib.auth import get_user_model
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 usuario = get_user_model()
 
@@ -30,3 +31,15 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = usuario.objects.create_user(**validated_data)
         return user
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims
+        token['username'] = user.username
+        # ...
+
+        return token
