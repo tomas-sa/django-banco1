@@ -25,6 +25,7 @@ class Transferencia(models.Model):
     )
     cantidad = models.IntegerField()
     fecha = models.DateTimeField(auto_now_add=True)
+    moneda = models.CharField(max_length=3)
 
     def __str__(self):
         return f'Transferencia de {self.cuenta_origen.user.username} a {self.cuenta_destino.user.username}'

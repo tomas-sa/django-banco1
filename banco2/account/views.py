@@ -82,7 +82,8 @@ class TransferenciaAPIView(APIView):
         transferencia = Transferencia.objects.create(
             cuenta_origen=cuenta_origen,
             cuenta_destino=cuenta_destino,
-            cantidad=cantidad
+            cantidad=cantidad,
+            moneda=moneda
         )
 
         serializer = RegistroSerializer(transferencia)
