@@ -7,6 +7,7 @@ from .models import CuentaCorriente, Transferencia
 from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from rest_framework import status
+from itertools import chain
 from .serializers import CuentaSerializer, UserSerializer, RegistroSerializer
 usuario = get_user_model()
 
@@ -55,7 +56,7 @@ class TransferenciaAPIView(APIView):
             user_id=usuario_origen_id, moneda=moneda).first()
         cuenta_destino = CuentaCorriente.objects.filter(
             user_id=usuario_destino_id, moneda=moneda).first()
-        print(cuenta_origen)
+        print(cuenta_destino)
 
         if not cuenta_origen:
             return Response({'error': 'Cuenta de origen no encontrada'}, status=400)
@@ -68,6 +69,9 @@ class TransferenciaAPIView(APIView):
 
         if cuenta_origen.dinero < cantidad:
             return Response({'error': 'Saldo insuficiente'}, status=400)
+
+        if cuenta_origen == cuenta_destino:
+            return Response({'error': 'No es posible realizar esta transferencia'}, status=400)
 
         cuenta_origen.dinero -= cantidad
         cuenta_destino.dinero += cantidad
@@ -87,8 +91,13 @@ class TransferenciaAPIView(APIView):
     def get(self, request, *args, **kwargs):
         usuario = request.user.id
 
-        transferencias = Transferencia.objects.filter(
+        transferencias_origen = Transferencia.objects.filter(
             cuenta_origen=usuario)
+        transferencias_destino = Transferencia.objects.filter(
+            cuenta_destino=usuario)
+
+        transferencias = list(
+            chain(transferencias_origen, transferencias_destino))
 
         serializer = RegistroSerializer(transferencias, many=True)
         return Response(serializer.data, status=200)
