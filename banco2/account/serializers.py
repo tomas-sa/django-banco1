@@ -20,13 +20,13 @@ class RegistroSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     ahorros = CuentaSerializer(read_only=True, many=True)
-    transferencias = RegistroSerializer(
-        source='ahorros.registrotransferencia_set', many=True, read_only=True)
+    transferencias_enviadas = RegistroSerializer(many=True, read_only=True)
+    transferencias_recibidas = RegistroSerializer(many=True, read_only=True)
 
     class Meta:
         model = usuario
         fields = ['id', 'ahorros', 'username',
-                  'email', 'transferencias', 'password']
+                  'email', 'transferencias_enviadas', 'transferencias_recibidas', 'password']
 
     def create(self, validated_data):
         user = usuario.objects.create_user(**validated_data)

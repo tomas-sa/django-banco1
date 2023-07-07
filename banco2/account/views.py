@@ -34,11 +34,11 @@ class CuentaViewSet(viewsets.ModelViewSet):
         return super().list(request, *args, **kwargs) """
 
 
-""" @authentication_classes([JWTAuthentication])
+@authentication_classes([JWTAuthentication])
 @permission_classes([IsAuthenticated])
 class UserViewSet(viewsets.ModelViewSet):
     queryset = usuario.objects.all()
-    serializer_class = UserSerializer """
+    serializer_class = UserSerializer
 
 
 class TransferenciaAPIView(APIView):
@@ -53,9 +53,9 @@ class TransferenciaAPIView(APIView):
         moneda = request.data.get('moneda')
 
         cuenta_origen = CuentaCorriente.objects.filter(
-            user_id=usuario_origen_id, moneda=moneda).first()
+            user=usuario_origen_id, moneda=moneda).first()
         cuenta_destino = CuentaCorriente.objects.filter(
-            user_id=usuario_destino_id, moneda=moneda).first()
+            user=usuario_destino_id, moneda=moneda).first()
         print(cuenta_destino)
 
         if not cuenta_origen:
@@ -93,9 +93,9 @@ class TransferenciaAPIView(APIView):
         usuario = request.user.id
 
         transferencias_origen = Transferencia.objects.filter(
-            cuenta_origen=usuario)
+            cuenta_origen__user_id=usuario)
         transferencias_destino = Transferencia.objects.filter(
-            cuenta_destino=usuario)
+            cuenta_destino__user_id=usuario)
 
         transferencias = list(
             chain(transferencias_origen, transferencias_destino))
