@@ -6,27 +6,28 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 usuario = get_user_model()
 
 
-class CuentaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CuentaCorriente
-        fields = '__all__'
-
-
 class RegistroSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transferencia
         fields = '__all__'
 
 
-class UserSerializer(serializers.ModelSerializer):
-    ahorros = CuentaSerializer(read_only=True, many=True)
+class CuentaSerializer(serializers.ModelSerializer):
     transferencias_enviadas = RegistroSerializer(many=True, read_only=True)
     transferencias_recibidas = RegistroSerializer(many=True, read_only=True)
 
     class Meta:
+        model = CuentaCorriente
+        fields = '__all__'
+
+
+class UserSerializer(serializers.ModelSerializer):
+    ahorros = CuentaSerializer(read_only=True, many=True)
+
+    class Meta:
         model = usuario
         fields = ['id', 'ahorros', 'username',
-                  'email', 'transferencias_enviadas', 'transferencias_recibidas', 'password']
+                  'email']
 
     def create(self, validated_data):
         user = usuario.objects.create_user(**validated_data)

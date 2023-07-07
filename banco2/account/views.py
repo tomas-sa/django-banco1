@@ -25,6 +25,35 @@ class CuentaViewSet(viewsets.ModelViewSet):
         user = self.request.user
         return user.ahorros.all()
 
+    def create(self, request):
+        user = request.user.id
+        moneda = request.data.get('moneda')
+
+        choices = ["USD", "EUR", "ARS"]
+
+        if not user:
+            return Response({'error': 'Usuario no encontrado'}, status=400)
+
+        if not moneda:
+            return Response({'error': 'Moneda no encontrada'}, status=400)
+
+        if moneda not in choices:
+            return Response({'error': 'Moneda no valida'}, status=400)
+
+        cuenta = usuario.objects.get(id=user)
+
+        if not cuenta:
+            return Response({'error': 'Cuenta no encontrada'}, status=400)
+
+        cuenta_ahorros = CuentaCorriente.objects.create(
+            user=cuenta,
+            moneda=moneda,
+            dinero=5000
+        )
+
+        serializer = CuentaSerializer(cuenta_ahorros)
+        return Response(serializer.data, status=201)
+
 
 # CODIGO QUE CHATGPT PROPORCIONÓ PARA OBTENER ID DE USUARIO LOGGEADO, ABERIGUAR SOBRE ESTO EN GOOGLE
 
