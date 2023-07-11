@@ -163,14 +163,11 @@ class UserCreateAPIView(APIView):
 
 
 class BuscarCuenta(APIView):
-    def get(self, request):
+    def post(self, request):
         id = request.data.get('id')
         moneda = request.data.get('moneda')
         cuentas = CuentaCorriente.objects.filter(user=id, moneda=moneda)
         serializer = CuentaSerializer(cuentas, many=True)
         if not serializer.data:
             return Response({'error': 'cuenta no encontrada'}, status=400)
-
-        cuenta_data = serializer.data[0]
-        nombre = cuenta_data.get('nombre')
-        return Response(nombre)
+        return Response(serializer.data)

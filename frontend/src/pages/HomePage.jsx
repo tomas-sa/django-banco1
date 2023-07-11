@@ -26,7 +26,6 @@ function HomePage() {
 
     if(response.status === 200){
       setTransactions(data)
-      console.log(data);
       
     }else if(response.statusText ==='Unauthorized'){
       logoutUser()
