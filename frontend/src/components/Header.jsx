@@ -1,20 +1,24 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import AuthContext from '../context/AuthContext'
+import '../styles/headerStyle.css'
 
 function Header() {
-  let {user} = useContext(AuthContext)
+  let {user, logoutUser, toggleMenu, menuVisible} = useContext(AuthContext)
+ 
+
+  
+
   return (
-    <div>
-        <Link to='/'>Home</Link>
+    <div className={`header ${menuVisible ? 'visible' : 'oculto'}`}>
+        <Link className='link' to='/home'>Home</Link>
         <span>   </span>
         {user ? (
-          <p>Logout</p>):(
-          <Link to='/login'>Login</Link>
+          <p onClick={logoutUser}>Logout</p>):(
+          <Link className='link' to='/login'>Login</Link>
         )}
-        {user && <p>Hello {user.username}</p>}
-        
+        <i onClick={toggleMenu} className="fa-solid fa-x"></i>
     </div>
   )
 }

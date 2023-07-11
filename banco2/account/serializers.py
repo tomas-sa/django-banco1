@@ -7,6 +7,11 @@ usuario = get_user_model()
 
 
 class RegistroSerializer(serializers.ModelSerializer):
+    envio = serializers.CharField(
+        read_only=True, source='cuenta_origen.user.username')
+    recibio = serializers.CharField(
+        read_only=True, source='cuenta_destino.user.username')
+
     class Meta:
         model = Transferencia
         fields = '__all__'
@@ -15,6 +20,7 @@ class RegistroSerializer(serializers.ModelSerializer):
 class CuentaSerializer(serializers.ModelSerializer):
     transferencias_enviadas = RegistroSerializer(many=True, read_only=True)
     transferencias_recibidas = RegistroSerializer(many=True, read_only=True)
+    nombre = serializers.CharField(read_only=True, source='user.username')
 
     class Meta:
         model = CuentaCorriente

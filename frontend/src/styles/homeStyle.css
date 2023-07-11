@@ -1,0 +1,56 @@
+.transferBox{
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 800;
+    justify-content: center;
+    background-color: rgb(218, 218, 218);
+    border-radius: 20px;
+    color: black;
+    margin-bottom: 10px;
+}
+.infoBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.moneyBox{
+    display: flex;
+    gap: 10px;
+}
+p{
+    margin: 5px;
+}
+.infoAccount{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.dineroBox{
+    background-color:rgb(218, 218, 218);
+    padding:0 30px;
+    color: #1f1f1f;
+    border-radius: 25px;
+    margin-bottom: 50px;
+}
+.opcionesBox{
+    display: flex;
+    justify-content: center;
+    font-size: 0.7rem;
+    gap: 30px;
+    margin-bottom: 60px;
+}
+.opBox{
+    background-color: #ffffff;
+    color: #1f1f1f;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px;
+}
+.fa-solid{
+    font-size: 2rem;
+}

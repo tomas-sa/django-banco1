@@ -20,7 +20,6 @@ class CuentaViewSet(viewsets.ModelViewSet):
     serializer_class = CuentaSerializer
 
     def get_queryset(self):
-        # Filtrar las cuentas bancarias del usuario logueado
 
         user = self.request.user
         return user.ahorros.all()
@@ -45,6 +44,12 @@ class CuentaViewSet(viewsets.ModelViewSet):
         if not cuenta:
             return Response({'error': 'Cuenta no encontrada'}, status=400)
 
+        cuenta_existente = CuentaCorriente.objects.filter(
+            user=cuenta, moneda=moneda).first()
+
+        if cuenta_existente:
+            return Response({'error': 'Ya existe una cuenta con la moneda proporcionada'}, status=400)
+
         cuenta_ahorros = CuentaCorriente.objects.create(
             user=cuenta,
             moneda=moneda,
@@ -68,6 +73,21 @@ class CuentaViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = usuario.objects.all()
     serializer_class = UserSerializer
+
+
+class UserAPIView(APIView):
+
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+
+    def get(self, request, *args, **kwargs):
+        user = request.data.get('usuario')
+
+        try:
+            respuesta = usuario.objects.get(id=user)
+        except:
+            return Response({'error': 'cuenta no encontrada'}, status=404)
+        return Response({'username': respuesta.username}, status=200)
 
 
 class TransferenciaAPIView(APIView):
@@ -140,3 +160,17 @@ class UserCreateAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class BuscarCuenta(APIView):
+    def get(self, request):
+        id = request.data.get('id')
+        moneda = request.data.get('moneda')
+        cuentas = CuentaCorriente.objects.filter(user=id, moneda=moneda)
+        serializer = CuentaSerializer(cuentas, many=True)
+        if not serializer.data:
+            return Response({'error': 'cuenta no encontrada'}, status=400)
+
+        cuenta_data = serializer.data[0]
+        nombre = cuenta_data.get('nombre')
+        return Response(nombre)
