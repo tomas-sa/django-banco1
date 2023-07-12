@@ -59,6 +59,7 @@ export const AuthProvider = ({children}) => {
             notifyError()
         }else{
             notifySuccess()
+            navigate('/home')
         }
         
         
@@ -136,6 +137,7 @@ export const AuthProvider = ({children}) => {
         menuVisible:menuVisible,
         checkUserTransfer:checkUserTransfer,
         userATransferir:userATransferir,
+        setUserATransferir:setUserATransferir,
         transferir:transferir
     }
 

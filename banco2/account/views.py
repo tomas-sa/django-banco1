@@ -8,7 +8,6 @@ from .models import CuentaCorriente, Transferencia
 from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from rest_framework import status
-from itertools import chain
 from .serializers import CuentaSerializer, UserSerializer, RegistroSerializer
 usuario = get_user_model()
 
@@ -146,8 +145,8 @@ class TransferenciaAPIView(APIView):
         transferencias_destino = Transferencia.objects.filter(
             cuenta_destino__user_id=usuario)
 
-        transferencias = list(
-            chain(transferencias_origen, transferencias_destino))
+        transferencias = transferencias_origen | transferencias_destino
+        transferencias = transferencias.order_by('-fecha')
 
         serializer = RegistroSerializer(transferencias, many=True)
         return Response(serializer.data, status=200)

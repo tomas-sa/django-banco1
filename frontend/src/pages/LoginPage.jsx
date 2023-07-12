@@ -1,4 +1,5 @@
 import React, {useContext} from 'react'
+import {Link} from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 import '../styles/loginStyle.css'
 
@@ -14,6 +15,9 @@ function LoginPage() {
             <input className='input' type="text" name='password' placeholder='Enter Password' />
             <input className='send' type="submit"/>
         </form>
+        <Link to='/signup'>
+          <button>Sign up</button>
+        </Link>
     </div>
   )
 }
