@@ -126,12 +126,12 @@ function HomePage() {
               {trans.envio == user.username ? (
                 <>
                   <p>{trans.recibio}</p>
-                  <p>Transferencia recibida</p>
+                  <p>Transferencia enviada</p>
                 </>
               ) : (
                 <>
                   <p>{trans.envio}</p>
-                  <p>Transferencia enviada</p>
+                  <p>Transferencia recibida</p>
                 </>
               )}
             </div>

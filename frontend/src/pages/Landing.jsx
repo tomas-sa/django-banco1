@@ -9,7 +9,7 @@ function Landing() {
             <img className='img' src="/bankimg.png" alt="" />
         </div>
         <div className="btnContainer">
-            <button className='btn signup'>Sign up</button>
+            <Link to='/signup'><button className='btn signup'>Sign up</button></Link>
             <Link to='/login'><button className='btn'>Sign in</button></Link>
         </div>
     </div>

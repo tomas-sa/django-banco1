@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 usuario = get_user_model()
@@ -14,6 +16,19 @@ class CuentaCorriente(models.Model):
 
     def __str__(self):
         return 'cuenta de ' + self.user.username + ' en ' + self.moneda
+
+
+@receiver(post_save, sender=usuario)
+def crear_cuenta_corriente(sender, instance, created, **kwargs):
+    if created:
+        print('Se ejecutó el receptor de la señal crear_cuenta_corriente')
+        request = kwargs.pop('request', None)
+        if request:
+            print(request)
+            moneda_nombre = request.data.get('moneda', 'USD')
+            cuenta_corriente = CuentaCorriente.objects.create(
+                user=instance, moneda=moneda_nombre, dinero=5000)
+            cuenta_corriente.save()
 
 
 class Transferencia(models.Model):
