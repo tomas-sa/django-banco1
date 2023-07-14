@@ -5,6 +5,7 @@ import Landing from './pages/Landing'
 import CajaAhorros from './pages/CajaAhorros'
 import Transferir from './pages/Transferir'
 import Prestamos from './pages/Prestamos'
+import Bars from './components/Bars'
 import Signup from './pages/Signup'
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import Header from './components/Header'
@@ -19,6 +20,7 @@ function App() {
         <BrowserRouter>
           <AuthProvider>
             <Header/>
+            <Bars/>
             <Routes>
               <Route element={ <PrivateRoutes/>}>
                 <Route element={<HomePage/>} path='/home'></Route>

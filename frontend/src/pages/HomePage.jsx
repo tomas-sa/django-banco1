@@ -10,7 +10,7 @@ function HomePage() {
   let [transactions, setTransactions ] = useState([])
   let [monedaSeleccionada, setMonedaSeleccionada ] = useState('USD')
   let [primerCarga, setPrimerCarga ] = useState(true)
-  let {authTokens, logoutUser, user, toggleMenu, setCbu} = useContext(AuthContext)
+  let {authTokens, logoutUser, user, setCbu} = useContext(AuthContext)
   let [monedasDisponibles, setMonedasDisponibles] = useState([])
 
   useEffect(() => {
@@ -63,6 +63,7 @@ function HomePage() {
         setInformation(data[0])
         setPrimerCarga(false)
         setCbu(data[0].user)
+        setNombreCompleto()
       }else{
         const filtrado = data.find((objeto) => objeto.moneda === monedaSeleccionada)
         setInformation(filtrado)
@@ -95,8 +96,7 @@ function HomePage() {
 
   return (
     <div className='home'>
-      {user && <p>Hello <b>{user.username}</b></p>}
-      <i onClick={toggleMenu} className="fa-solid fa-bars-staggered"></i>
+      {user && <p className='hello'>Hello <b>{user.username}</b></p>}
       {information ? (
         <div className='infoAccount'>
           <p>Cuenta en <b>{information.moneda}</b></p>
@@ -135,7 +135,7 @@ function HomePage() {
         </div>
         </Link>
       </div>
-      
+      <div className="backBox">
         {transactions.map( trans => (
           
           <div key={trans.id} className="transferBox">
@@ -161,6 +161,7 @@ function HomePage() {
             </div>
           </div>
         ))}
+      </div>
     </div>
   )
 }

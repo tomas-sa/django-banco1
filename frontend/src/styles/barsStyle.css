@@ -1,0 +1,10 @@
+.fa-bars-staggered{
+    background-color: rgb(210, 212, 212);
+    padding: 10px;
+    border-radius: 50%;
+}
+.barBox{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}

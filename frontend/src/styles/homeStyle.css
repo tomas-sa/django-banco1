@@ -1,10 +1,19 @@
+*{
+    font-family: 'Satoshi', sans-serif;
+    color: #1f1f1f;
+}
+.backBox{
+    background-color: #E23E57;
+    border-radius: 20px;
+    padding: 30px 10px;
+}
 .transferBox{
     display: flex;
     align-items: center;
     font-size: 1rem;
     font-weight: 800;
     justify-content: center;
-    background-color: rgb(218, 218, 218);
+    background-color: rgba(218, 218, 218, 0.9);
     border-radius: 20px;
     color: black;
     margin-bottom: 10px;
@@ -29,10 +38,11 @@ p{
 }
 .dineroBox{
     background-color:rgb(218, 218, 218);
-    padding:0 30px;
+    padding:0 40px;
     color: #1f1f1f;
     border-radius: 25px;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 .opcionesBox{
     display: flex;
@@ -68,4 +78,8 @@ p{
     font-weight: 400;
     padding: 6px;
     border-radius: 10px;
+}
+.home{
+    background-color: #F0F0F0;
+    margin-top: 30px;
 }
