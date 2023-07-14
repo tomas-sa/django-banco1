@@ -13,6 +13,7 @@ class CuentaCorriente(models.Model):
     moneda = models.CharField(max_length=3, choices=[(
         'ARS', 'ARS'), ('USD', 'USD'), ('EUR', 'EUR')])
     dinero = models.IntegerField()
+    prestamo = models.IntegerField(default=10000)
 
     def __str__(self):
         return 'cuenta de ' + self.user.username + ' en ' + self.moneda

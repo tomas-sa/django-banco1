@@ -173,3 +173,38 @@ class BuscarCuenta(APIView):
         if not serializer.data:
             return Response({'error': 'cuenta no encontrada'}, status=400)
         return Response(serializer.data)
+
+
+class Prestamo(APIView):
+
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+
+    def post(self, request):
+        id = request.user.id
+        moneda = request.data.get('moneda')
+        cuenta = CuentaCorriente.objects.filter(user=id, moneda=moneda).first()
+        print(cuenta.prestamo)
+        monto = request.data.get('monto')
+
+        if not cuenta:
+            return Response({'error', 'Cuenta no encontrada'})
+
+        if cuenta.prestamo < monto:
+            return Response({'error', 'el saldo ingresado excede el monto del prestamo'}, status=405)
+
+        cuenta.prestamo -= monto
+        cuenta.dinero += monto
+        cuenta.save()
+        return Response({'dinero actual: ', cuenta.dinero}, status=200)
+
+    def get(self, request):
+        id = request.user.id
+        """ moneda = request.data.get('moneda') """
+        cuentas = CuentaCorriente.objects.filter(user=id)
+
+        if not cuentas:
+            return Response({'error': 'Cuenta no encontrada'})
+
+        serializer = CuentaSerializer(cuentas, many=True)
+        return Response(serializer.data, status=200)
