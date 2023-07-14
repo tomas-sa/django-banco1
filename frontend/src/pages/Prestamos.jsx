@@ -2,6 +2,8 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
 import AuthContext from '../context/AuthContext'
+import {useNavigate} from 'react-router-dom'
+import toast, { Toaster} from 'react-hot-toast';
 
 function Prestamos() {
 
@@ -9,6 +11,10 @@ function Prestamos() {
   const [prestamos, setPrestamos] = useState([])
   const [seleccionado, setSeleccionado] = useState([])
   const [monedas, setMonedas] = useState([])
+  const navigate = useNavigate()
+
+  const notifyError = () => toast.error('no puedes pedir esa cantidad');
+  const notifySuccess = () => toast.success('prestamo concedido');
 
   useEffect(()=>{
     getPrestamos()
@@ -27,15 +33,24 @@ function Prestamos() {
   }
 
   let postPrestamos = async (e) => {
+    e.preventDefault()
+
     let response = await fetch('http://127.0.0.1:8000/cuentas/prestamos/',{
       method:'POST',
       headers:{
         'Content-Type':'application/json',
         'Authorization': 'Bearer ' + String(authTokens.access)
       },
-      body:JSON.stringify({'monto':e.target.username.value, 'moneda':e.target.username.value})
+      body:JSON.stringify({'monto':parseInt(e.target.monto.value), 'moneda':seleccionado.moneda})
     })
     let data = await response.json()
+    if(response.status == 405){
+      notifyError()
+    }else{
+      notifySuccess()
+      navigate('/home')
+    }
+    
   }
 
   let getPrestamos = async () =>{
@@ -67,9 +82,9 @@ function Prestamos() {
         ))}
       </div>
       
-      <form action="">
-        <input type="number" placeholder='$0' name='prestamoForm'/>
-        <input type="submit" name="" id="" />
+      <form onSubmit={postPrestamos}>
+        <input type="number" placeholder='$0' name='monto'/>
+        <input type="submit"/>
       </form>
       <Link to='/home'>
         <button>Home</button>
