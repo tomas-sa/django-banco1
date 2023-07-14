@@ -17,6 +17,7 @@ export const AuthProvider = ({children}) => {
     let [userATransferir, setUserATransferir] = useState('')
     let [idATransferir, setidATransferir] = useState('')
     let [monedaATransferir, setMonedaATransferir] = useState('')
+    let [Cbu, setCbu] = useState('')
 
     const notifyError = () => toast.error('No tienes saldo suficiente');
     const notifySuccess = () => toast.success('Transferencia exitosa');
@@ -138,7 +139,9 @@ export const AuthProvider = ({children}) => {
         checkUserTransfer:checkUserTransfer,
         userATransferir:userATransferir,
         setUserATransferir:setUserATransferir,
-        transferir:transferir
+        transferir:transferir,
+        setCbu:setCbu,
+        Cbu:Cbu
     }
 
     

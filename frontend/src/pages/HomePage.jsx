@@ -9,13 +9,15 @@ function HomePage() {
   let [information, setInformation ] = useState({})
   let [transactions, setTransactions ] = useState([])
   let [monedaSeleccionada, setMonedaSeleccionada ] = useState('USD')
-  let {authTokens, logoutUser, user, toggleMenu} = useContext(AuthContext)
+  let [primerCarga, setPrimerCarga ] = useState(true)
+  let {authTokens, logoutUser, user, toggleMenu, setCbu} = useContext(AuthContext)
   let [monedasDisponibles, setMonedasDisponibles] = useState([])
 
   useEffect(() => {
     getTransactions()
     getMoney()
   }, [monedaSeleccionada])
+
 
   let getTransactions = async () => {
     let response = await fetch('http://127.0.0.1:8000/cuentas/transferencia/',{
@@ -36,7 +38,8 @@ function HomePage() {
   }
 
   let getMoney = async () => {
-    let response = await fetch('http://127.0.0.1:8000/cuentas/ahorros/',{
+    try{
+      let response = await fetch('http://127.0.0.1:8000/cuentas/ahorros/',{
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -56,12 +59,26 @@ function HomePage() {
       })
 
       setMonedasDisponibles(monedas)
-      const filtrado = data.find((objeto) => objeto.moneda === monedaSeleccionada)
-      setInformation(filtrado)
+      if(primerCarga){
+        setInformation(data[0])
+        setPrimerCarga(false)
+        setCbu(data[0].user)
+      }else{
+        const filtrado = data.find((objeto) => objeto.moneda === monedaSeleccionada)
+        setInformation(filtrado)
+      }
+      
+
+      
+      
       
     }else if(response.statusText ==='Unauthorized'){
       logoutUser()
     }
+    }catch(error){
+      console.log(error);
+    }
+    
 
   }
 
@@ -140,7 +157,7 @@ function HomePage() {
               <p>$ {trans.cantidad}</p>
               <p>{trans.moneda}</p>
             </div>
-            <p>{fechaFormater(trans.fecha)}</p>
+            {fechaFormater(trans.fecha)}
             </div>
           </div>
         ))}
