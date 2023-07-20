@@ -12,9 +12,9 @@
     align-items: center;
     font-size: 1rem;
     font-weight: 800;
-    justify-content: center;
+    justify-content: space-around;
     background-color: rgba(218, 218, 218, 0.9);
-    border-radius: 20px;
+    border-radius: 10px;
     color: black;
     margin-bottom: 10px;
 }
@@ -26,7 +26,6 @@
 
 .moneyBox{
     display: flex;
-    gap: 10px;
 }
 p{
     margin: 5px;
@@ -43,6 +42,7 @@ p{
     border-radius: 25px;
     margin-bottom: 20px;
     margin-top: 20px;
+    filter: drop-shadow(1px 1px 5px #525252);
 }
 .opcionesBox{
     display: flex;
@@ -78,8 +78,40 @@ p{
     font-weight: 400;
     padding: 6px;
     border-radius: 10px;
+    cursor: pointer;
 }
 .home{
     background-color: #F0F0F0;
     margin-top: 30px;
+}
+.datosBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.trans{
+    font-weight: 400;
+}
+.flecha{
+    font-size: 1.5rem;
+}
+@media screen and (min-width: 768px){
+    .transactionsComponent{
+        position: absolute;
+        top: 60px;
+        left: 0;
+    }
+    .backBox{
+        border-radius: 0;
+        padding: 50px 40px;
+    }
+    .homeInter{
+        position: fixed;
+        left: 50%;
+        top: 0;
+        transform: translate(-20%, 25%);
+    }
+    .hello{
+        display: none;
+    }
 }

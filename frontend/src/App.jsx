@@ -12,6 +12,10 @@ import Header from './components/Header'
 import PrivateRoutes from './utils/PrivateRoutes'
 import {AuthProvider} from './context/AuthContext'
 import toast, { Toaster} from 'react-hot-toast';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
 
 function App() {
 
@@ -28,7 +32,7 @@ function App() {
                 <Route element={<Transferir/>} path='/transferir'></Route>
                 <Route element={<Prestamos/>} path='/prestamos'></Route>
               </Route>
-              <Route element={<Landing/>} path='/'/> 
+              <Route element={<Landing/>} path='/landing'/> 
               <Route element={<LoginPage/>} path='/login'/>
               <Route element={<Signup/>} path='/signup'></Route>
             </Routes>
@@ -47,3 +51,4 @@ function App() {
 }
 
 export default App
+library.add(fab, fas, far)

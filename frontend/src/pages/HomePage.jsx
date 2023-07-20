@@ -2,44 +2,25 @@ import React, {useState, useEffect, useContext} from 'react'
 import AuthContext from '../context/AuthContext'
 import { Link } from 'react-router-dom'
 import '../styles/homeStyle.css'
-import moment from 'moment'
+import Transactions from '../components/Transactions'
 
 function HomePage() {
 
   let [information, setInformation ] = useState({})
-  let [transactions, setTransactions ] = useState([])
   let [monedaSeleccionada, setMonedaSeleccionada ] = useState('USD')
   let [primerCarga, setPrimerCarga ] = useState(true)
   let {authTokens, logoutUser, user, setCbu} = useContext(AuthContext)
   let [monedasDisponibles, setMonedasDisponibles] = useState([])
 
   useEffect(() => {
-    getTransactions()
     getMoney()
   }, [monedaSeleccionada])
 
 
-  let getTransactions = async () => {
-    let response = await fetch('http://127.0.0.1:8000/cuentas/transferencia/',{
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + String(authTokens.access)
-      }
-    })
-    let data = await response.json()
-
-    if(response.status === 200){
-      setTransactions(data)
-      
-    }else if(response.statusText ==='Unauthorized'){
-      logoutUser()
-    }
-  }
 
   let getMoney = async () => {
     try{
-      let response = await fetch('http://127.0.0.1:8000/cuentas/ahorros/',{
+      let response = await fetch('https://drfbank.onrender.com/cuentas/ahorros/',{
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -63,7 +44,6 @@ function HomePage() {
         setInformation(data[0])
         setPrimerCarga(false)
         setCbu(data[0].user)
-        setNombreCompleto()
       }else{
         const filtrado = data.find((objeto) => objeto.moneda === monedaSeleccionada)
         setInformation(filtrado)
@@ -87,16 +67,12 @@ function HomePage() {
     setMonedaSeleccionada(e.target.textContent)
   }
 
-  const fechaFormater = (fecha) => {
-  const fechaISO = fecha;
-  const fechaFormateada = moment(fechaISO).format('DD/MM/YY');
-
-  return <p>{fechaFormateada}</p>;
-};
-
   return (
     <div className='home'>
-      {user && <p className='hello'>Hello <b>{user.username}</b></p>}
+      <div className="homeInter">
+        <div className="hello">
+          {user && <p className='hello'>Hello <b>{user.username}</b></p>}
+        </div>
       {information ? (
         <div className='infoAccount'>
           <p>Cuenta en <b>{information.moneda}</b></p>
@@ -110,9 +86,9 @@ function HomePage() {
       )}
 
       <div className="selectMonedaBox">
-        {monedasDisponibles.length > 0 ? monedasDisponibles.map(moneda => (
+        {monedasDisponibles.length > 0 && monedasDisponibles.map(moneda => (
           <p key={moneda} onClick={cambiarMoneda}>{moneda}</p>
-        )): <p>cargando</p>}
+        ))}
       </div>
 
       <div className="opcionesBox">
@@ -135,32 +111,10 @@ function HomePage() {
         </div>
         </Link>
       </div>
-      <div className="backBox">
-        {transactions.map( trans => (
-          
-          <div key={trans.id} className="transferBox">
-            <div className="infoBox">
-              {trans.envio == user.username ? (
-                <>
-                  <p>{trans.recibio}</p>
-                  <p>Transferencia enviada</p>
-                </>
-              ) : (
-                <>
-                  <p>{trans.envio}</p>
-                  <p>Transferencia recibida</p>
-                </>
-              )}
-            </div>
-            <div className="datosBox">
-              <div className="moneyBox">
-              <p>$ {trans.cantidad}</p>
-              <p>{trans.moneda}</p>
-            </div>
-            {fechaFormater(trans.fecha)}
-            </div>
-          </div>
-        ))}
+      </div>
+      
+      <div className="transactionsComponent">
+        <Transactions/>
       </div>
     </div>
   )

@@ -2,40 +2,53 @@ import React from 'react'
 import { useContext } from 'react'
 import AuthContext from '../context/AuthContext'
 import { Link } from 'react-router-dom'
+import '../styles/transferirStyle.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function Transferir() {
-    const {checkUserTransfer, userATransferir,setUserATransferir, transferir} = useContext(AuthContext)
+    const {checkUserTransfer, userATransferir,setUserATransferir, transferir, loadingIcon} = useContext(AuthContext)
 
 
     const handleHomeClick = () => {
-    setUserATransferir(''); // O establecer en otro valor apropiado
-  };
+    setUserATransferir('')
+  }
 
   return (
     <div>
         {userATransferir ? (
             <div className="transferirBox">
-                <p>transferir a {userATransferir}</p>
-                <form onSubmit={transferir}>
-                    <input type="number" placeholder='$0' name='monto' />
-                    <input type="submit" />
-                </form>
-                <Link  className='link' to='/home'>
-                    <button onClick={handleHomeClick}>Home</button>
-                </Link>
+                <div className="transferirBoxInside">
+                    <p>transferir a {userATransferir}</p>
+                    <form className='formTransferir' onSubmit={transferir}>
+                        <input required className='inputTransferir' type="number" placeholder='$0' name='monto' />
+                        {loadingIcon ? 
+                        <FontAwesomeIcon className='rotate-icon' icon="fa-solid fa-spinner" />:
+                        <button className='submitTransferir'>Enviar</button>}
+                        
+                    </form>
+                    <Link  className='link' to='/home'>
+                        <button onClick={handleHomeClick}>Home</button>
+                    </Link>
+                </div>
             </div>
         ):(
-            <>
-                <form onSubmit={checkUserTransfer}>
-                    <input placeholder='CBU' type="text" name='cbu' />
-                    <input placeholder='Moneda' type="text" name='moneda' />
-                    <input className='send' type="submit"/>
+            <div className='formTransBox'>
+                <form className='formTransferir' onSubmit={checkUserTransfer}>
+                    <input required className='cbu' placeholder='CBU' type="text" name='cbu' />
+                    <select className='dropdown' name="moneda" id="selected_moneda">
+                        <option value="EUR">EUR</option>
+                        <option value="USD">USD</option>
+                        <option value="ARS">ARS</option>
+                    </select>
+                    {loadingIcon ? 
+                        <FontAwesomeIcon className='rotate-icon' icon="fa-solid fa-spinner" />:
+                        <button className='submitTransferir'>Enviar</button>}
                 </form>
-                <Link  className='link' to='/home'>
+                <Link onClick={handleHomeClick} className='link' to='/home'>
                     <button >Cancelar</button>
                 </Link>
                 
-            </>
+            </div>
         )
         
         }

@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {useNavigate} from 'react-router-dom'
 import toast, { Toaster} from 'react-hot-toast';
+import '../styles/signupStyle.css'
 
 
 function Signup() {
@@ -13,7 +14,7 @@ function Signup() {
   let crearCuenta = async (e) => {
     e.preventDefault()
 
-    let response = await fetch('http://127.0.0.1:8000/cuentas/createuser/', {
+    let response = await fetch('https://drfbank.onrender.com/cuentas/createuser/', {
       method:'POST',
       headers:{
         'Content-Type': 'application/json',
@@ -31,7 +32,7 @@ function Signup() {
             notifyError()
     }else{
             notifySuccess()
-            navigate('/')
+            navigate('/login')
         }
   }
 
@@ -40,7 +41,7 @@ function Signup() {
     <div>
         <h3>Abrir cuenta bancaria</h3>
         <Link to='/login'> <button>Home</button> </Link>
-        <form onSubmit={crearCuenta}>
+        <form className='signupForm' onSubmit={crearCuenta}>
             <input name='first_name' type="text" placeholder='Name' />
             <input name='username' type="text" placeholder='username' />
             <input name='last_name' type="text" placeholder='Last name' />
@@ -52,7 +53,7 @@ function Signup() {
                 <option value="EUR">EUR</option>
                 <option value="ARS">ARS</option>
             </select>
-            <input type="submit"/>
+            <input className='enviarSignup' type="submit"/>
         </form>
     </div>
   )

@@ -18,18 +18,23 @@ export const AuthProvider = ({children}) => {
     let [idATransferir, setidATransferir] = useState('')
     let [monedaATransferir, setMonedaATransferir] = useState('')
     let [Cbu, setCbu] = useState('')
+    let [transactions, setTransactions ] = useState([])
 
     const notifyError = () => toast.error('No tienes saldo suficiente');
+    const notifyErrorTransferencia = () => toast.error('Cuenta inexistente');
+    const notifyErrorLogin = () => toast.error('Invalid user or password');
     const notifySuccess = () => toast.success('Transferencia exitosa');
 
      const [menuVisible, setMenuVisible] = useState(false);
+     const [loadingIcon, setLoadingIcon] = useState(false)
 
     const navigate = useNavigate()
 
     let checkUserTransfer = async (e) => {
         e.preventDefault()
+        setLoadingIcon(true)
 
-        let response = await fetch('http://127.0.0.1:8000/cuentas/getcuenta/', {
+        let response = await fetch('https://drfbank.onrender.com/cuentas/getcuenta/', {
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -38,15 +43,24 @@ export const AuthProvider = ({children}) => {
         })
 
         let data = await response.json()
-        setUserATransferir(data[0].nombre)
-        setidATransferir(data[0].user)
-        setMonedaATransferir(e.target.moneda.value)
+        if(response.status === 200){
+            setUserATransferir(data[0].nombre)
+            setidATransferir(data[0].user)
+            setMonedaATransferir(e.target.moneda.value)
+            setLoadingIcon(false)
+        }else{
+            setLoadingIcon(false)
+            notifyErrorTransferencia()
+            
+        }
+        
     }
 
     let transferir = async (e) => {
         e.preventDefault()
+        setLoadingIcon(true)
 
-        let response = await fetch('http://127.0.0.1:8000/cuentas/transferencia/', {
+        let response = await fetch('https://drfbank.onrender.com/cuentas/transferencia/', {
             method:'POST',
             headers:{
                 'Content-Type':'application/json',
@@ -57,8 +71,11 @@ export const AuthProvider = ({children}) => {
         
         let data = await response.json()
         if(data.error){
+            setLoadingIcon(false)
             notifyError()
         }else{
+            setLoadingIcon(false)
+            setUserATransferir('')
             notifySuccess()
             navigate('/home')
         }
@@ -68,8 +85,8 @@ export const AuthProvider = ({children}) => {
 
     let loginUser = async (e) => {
         e.preventDefault()
-
-        let response = await fetch('http://127.0.0.1:8000/api/token/', {
+        setLoadingIcon(true)
+        let response = await fetch('https://drfbank.onrender.com/api/token/', {
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -83,8 +100,10 @@ export const AuthProvider = ({children}) => {
             setUser(jwt_decode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))
             navigate('/home')
+            setLoadingIcon(false)
         }else{
-            alert('something went wrong')
+            notifyErrorLogin()
+            setLoadingIcon(false)
         }
     }
 
@@ -99,7 +118,7 @@ export const AuthProvider = ({children}) => {
 
     let updateToken = async () => {
         console.log('updated');
-        let response = await fetch('http://127.0.0.1:8000/api/token/refresh/', {
+        let response = await fetch('https://drfbank.onrender.com/api/token/refresh/', {
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -141,7 +160,12 @@ export const AuthProvider = ({children}) => {
         setUserATransferir:setUserATransferir,
         transferir:transferir,
         setCbu:setCbu,
-        Cbu:Cbu
+        Cbu:Cbu,
+        loadingIcon:loadingIcon,
+        setLoadingIcon:setLoadingIcon,
+        transactions:transactions,
+        setTransactions:setTransactions
+
     }
 
     

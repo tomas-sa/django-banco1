@@ -4,10 +4,12 @@ import { useContext, useEffect, useState } from 'react'
 import AuthContext from '../context/AuthContext'
 import {useNavigate} from 'react-router-dom'
 import toast, { Toaster} from 'react-hot-toast';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import '../styles/prestamosStyle.css'
 
 function Prestamos() {
 
-  let {authTokens} = useContext(AuthContext)
+  let {authTokens, loadingIcon, setLoadingIcon} = useContext(AuthContext)
   const [prestamos, setPrestamos] = useState([])
   const [seleccionado, setSeleccionado] = useState([])
   const [monedas, setMonedas] = useState([])
@@ -34,8 +36,9 @@ function Prestamos() {
 
   let postPrestamos = async (e) => {
     e.preventDefault()
+    setLoadingIcon(true)
 
-    let response = await fetch('http://127.0.0.1:8000/cuentas/prestamos/',{
+    let response = await fetch('https://drfbank.onrender.com/cuentas/prestamos/',{
       method:'POST',
       headers:{
         'Content-Type':'application/json',
@@ -45,8 +48,10 @@ function Prestamos() {
     })
     let data = await response.json()
     if(response.status == 405){
+      setLoadingIcon(false)
       notifyError()
     }else{
+      setLoadingIcon(false)
       notifySuccess()
       navigate('/home')
     }
@@ -54,7 +59,7 @@ function Prestamos() {
   }
 
   let getPrestamos = async () =>{
-    let response = await fetch('http://127.0.0.1:8000/cuentas/prestamos/',{
+    let response = await fetch('https://drfbank.onrender.com/cuentas/prestamos/',{
       method:'GET',
       headers:{
         'Content-Type':'application/json',
@@ -74,17 +79,19 @@ function Prestamos() {
   return (
     <div>
       <h3>Prestamo disponible</h3>
-      {seleccionado && <p>Moneda: {seleccionado.moneda}</p>}
-      {seleccionado && <p>$ {seleccionado.prestamo}</p>}
+      <div className="opcionesPrestamo">
+        {seleccionado && <p>Moneda: <b>{seleccionado.moneda}</b></p>}
+      {seleccionado && <p className='disponiblePrestamo'>$ {seleccionado.prestamo}</p>}
       <div className="selectCurr">
         {monedas.length > 0 && monedas.map(x =>(
           <p key={x} onClick={cambiarMonedaHandler} name={x}>{x}</p>
         ))}
       </div>
-      
-      <form onSubmit={postPrestamos}>
-        <input type="number" placeholder='$0' name='monto'/>
-        <input type="submit"/>
+      </div>
+      <form className='formPrestamo' onSubmit={postPrestamos}>
+        <input required className='input' type="number" placeholder='$0' name='monto'/>
+        {loadingIcon ? <FontAwesomeIcon className='rotate-icon' icon="fa-solid fa-spinner" />:
+        <input className='submitPrestamo' type="submit"/>}
       </form>
       <Link to='/home'>
         <button>Home</button>

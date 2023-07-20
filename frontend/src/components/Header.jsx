@@ -14,14 +14,14 @@ function Header() {
     <div className={`header ${menuVisible ? 'visible' : 'oculto'}`}>
       <i onClick={toggleMenu} className="fa-solid fa-x"></i>
       <div className="menuHeader">
+        {user && <p>Hello <b>{user.username}</b></p>}
+        {(Cbu && user ) && <p>CBU: {Cbu}</p>}
         <Link className='link' to='/home'>Home</Link>
         <span>   </span>
         {user ? (
           <p onClick={logoutUser}>Logout</p>):(
           <Link className='link' to='/login'>Login</Link>
         )}
-        
-        {(Cbu && user ) && <p>CBU: {Cbu}</p>}
       </div>
     </div>
   )

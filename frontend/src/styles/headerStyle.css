@@ -25,3 +25,24 @@
     font-weight: 400;
     gap: 10px;
 }
+@media screen and (min-width: 768px){
+    .header{
+        height: 60px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        background-color: rgb(228, 228, 228);
+        filter: drop-shadow(1px 1px 5px #8d8d8d);
+    }
+    .menuHeader{
+        flex-direction: row;
+        width: 100%;
+        margin-top: 0;
+        justify-content: space-around;
+        
+    }
+    .fa-x{
+        display: none;
+    }
+}

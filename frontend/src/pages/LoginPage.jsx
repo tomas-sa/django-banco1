@@ -1,23 +1,31 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import {Link} from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 import '../styles/loginStyle.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+
 
 function LoginPage() {
 
-  let {loginUser} = useContext(AuthContext)
+  let {loginUser, loadingIcon} = useContext(AuthContext)
+  
   return (
     <div>
-        <form className='form' onSubmit={loginUser}>
-            <p>Username</p>
-            <input className='input' type="text" name='username' placeholder='Enter Username' />
-            <p>Password</p>
-            <input className='input' type="text" name='password' placeholder='Enter Password' />
-            <input className='send' type="submit"/>
-        </form>
+      
         <Link to='/signup'>
-          <button>Sign up</button>
+          <button className='signupBtn'>Sign up</button>
         </Link>
+        <form className='form' onSubmit={loginUser}>
+            <input className='inputLogin' type="text" name='username' placeholder='Enter Username' />
+            <input className='inputLogin' type="text" name='password' placeholder='Enter Password' />
+            {loadingIcon ? 
+            <button className='sendInput'>
+                <FontAwesomeIcon className='rotate-icon' icon="fa-solid fa-spinner" />
+            </button> :
+            <button className='sendInput'>Enviar</button>}
+            
+        </form>
     </div>
   )
 }
