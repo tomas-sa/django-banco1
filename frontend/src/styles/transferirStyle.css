@@ -43,3 +43,16 @@
     border-radius: 10px;
     margin-top: 20px;
 }
+@media screen and (min-width: 768px){
+    .transMainBox {
+        display: flex;
+        align-items: center;
+        gap: 100px;
+        margin-top: 10%;
+        margin-left: 10%;
+    }
+    .formTransBox, .transferirBox{
+        position: initial;
+        transform: translate(0%, 0%);
+    }
+}

@@ -42,7 +42,7 @@ function CajaAhorros() {
 
   return (
     <div className='mainContainer'>
-        <img src="Money jar_Flatline.png" alt="" />
+        <img className='money_jar' src="Money jar_Flatline.png" alt="" />
        
         <div className="todoBox">
              <p className='titleNuevaCaja'>Elije la moneda que deseas en tu nueva cuenta</p>

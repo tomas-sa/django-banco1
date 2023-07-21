@@ -3,7 +3,7 @@
     color: #1f1f1f;
 }
 .backBox{
-    background-color: #E23E57;
+    background-color: #fd546d;
     border-radius: 20px;
     padding: 30px 10px;
 }
@@ -60,6 +60,15 @@ p{
     align-items: center;
     padding: 10px;
     border-radius: 20px;
+}
+.opBox:hover{
+    background-color: #E23E57;
+    color: #F0F0F0;
+    transition: ease-in-out 0.2s;
+}
+.opBox:hover >*{
+    color: #F0F0F0;
+    transition: ease-in-out 0.2s;
 }
 .fa-solid{
     font-size: 2rem;

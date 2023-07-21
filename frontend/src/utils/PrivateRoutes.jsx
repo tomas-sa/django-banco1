@@ -8,7 +8,7 @@ function PrivateRoutes(){
     
 
     return(
-    user ? <Outlet/> : <Navigate to={'/landing'}/>
+    user ? <Outlet/> : <Navigate to={'/login'}/>
     )
 }
 

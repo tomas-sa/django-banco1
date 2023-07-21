@@ -45,4 +45,15 @@
     .fa-x{
         display: none;
     }
+    .linkHome{
+        background-color: #E34F89;
+        padding: 5px 15px;
+        border-radius: 10px;
+        border: 1px solid #E34F89;
+    }
+    .linkHome:hover{
+        background-color: rgb(228, 228, 228);
+        color: black;
+        transition: ease-in-out 0.2s;
+    }
 }

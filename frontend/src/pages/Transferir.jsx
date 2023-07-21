@@ -14,7 +14,8 @@ function Transferir() {
   }
 
   return (
-    <div>
+    <div className='transMainBox'>
+        <img src="Moneytransfer_Monochromatic.png" alt="" />
         {userATransferir ? (
             <div className="transferirBox">
                 <div className="transferirBoxInside">

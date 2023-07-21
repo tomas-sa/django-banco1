@@ -42,3 +42,28 @@ input::placeholder{
     align-items: center;
     margin-bottom: 40px;
 }
+.imgNotes{
+    display: none;
+}
+.selectCurr>*{
+    cursor: pointer;
+}
+@media screen and (min-width: 768px){
+    .formPrestamo{
+        width: 30%;
+    }
+    .prestamoBox{
+        margin-top: 5%;
+        display: flex;
+        align-items: center;
+    }
+    .assetsBox{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .imgNotes{
+        display: initial;
+        width: 70%;
+    }
+}

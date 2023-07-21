@@ -12,22 +12,25 @@ function LoginPage() {
   
   return (
     <div>
-      
-        <Link to='/signup'>
-          <button className='signupBtn'>Sign up</button>
-        </Link>
+      <h1 className='titleLogin'>BankApp</h1>
         <div className="loginBox">
-        <img src="Currency_Flatline.png" alt="" />
+        <img className='imgLogin' src="Currency_Flatline.png" alt="" />
         <form className='form' onSubmit={loginUser}>
             <input className='inputLogin' type="text" name='username' placeholder='Enter Username' />
-            <input className='inputLogin' type="text" name='password' placeholder='Enter Password' />
+            <input className='inputLogin' type="password" name='password' placeholder='Enter Password' />
             {loadingIcon ? 
             <button className='sendInput'>
                 <FontAwesomeIcon className='rotate-icon' icon="fa-solid fa-spinner" />
             </button> :
-            <button className='sendInput'>Enviar</button>}
+            <button className='sendInput'>Log in</button>}
+            <div className="btnLoginBox">
+              <Link to='/signup'>
+                <button className='signupBtn'>Sign up</button>
+              </Link>
+            </div>
             
         </form>
+        
         </div>
     </div>
   )

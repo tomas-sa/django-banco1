@@ -1,5 +1,4 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
 import AuthContext from '../context/AuthContext'
 import {useNavigate} from 'react-router-dom'
@@ -77,9 +76,14 @@ function Prestamos() {
   }
 
   return (
-    <div>
-      <h3>Prestamo disponible</h3>
-      <div className="opcionesPrestamo">
+    <div className='prestamoBox'>
+      <div className="assetsBox">
+        <h3>Prestamo disponible</h3>
+        <p>puedes pedir prestamos de hasta 10.000 <br /> en cada moneda para poder probar la app</p>
+        <img className='imgNotes' src="Bank note_Outline.png" alt="" />
+      </div>
+      <div className="prestamoBoxInter">
+        <div className="opcionesPrestamo">
         {seleccionado && <p>Moneda: <b>{seleccionado.moneda}</b></p>}
       {seleccionado && <p className='disponiblePrestamo'>$ {seleccionado.prestamo}</p>}
       <div className="selectCurr">
@@ -93,9 +97,7 @@ function Prestamos() {
         {loadingIcon ? <FontAwesomeIcon className='rotate-icon' icon="fa-solid fa-spinner" />:
         <input className='submitPrestamo' type="submit"/>}
       </form>
-      <Link to='/home'>
-        <button>Home</button>
-      </Link>
+      </div>
     </div>
   )
 }

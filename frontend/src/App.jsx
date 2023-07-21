@@ -1,7 +1,6 @@
 import './App.css'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
-import Landing from './pages/Landing'
 import CajaAhorros from './pages/CajaAhorros'
 import Transferir from './pages/Transferir'
 import Prestamos from './pages/Prestamos'
@@ -32,7 +31,6 @@ function App() {
                 <Route element={<Transferir/>} path='/transferir'></Route>
                 <Route element={<Prestamos/>} path='/prestamos'></Route>
               </Route>
-              <Route element={<Landing/>} path='/landing'/> 
               <Route element={<LoginPage/>} path='/login'/>
               <Route element={<Signup/>} path='/signup'></Route>
             </Routes>
