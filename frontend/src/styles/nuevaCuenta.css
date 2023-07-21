@@ -4,20 +4,40 @@
     margin-top: 100px;
 }
 .monedaBox >*{
-    background-color: antiquewhite;
+    background-color: #E34F89;
     color: black;
-    padding: 10px;
-    border-radius: 20px;
+    padding: 0 20px;
     font-weight: 500;
+    border: 1px solid rgb(0, 0, 0);
+    cursor: pointer;
 }
 .send{
-    padding: 0;
-
+    padding:3px 40px;
+    margin-top: 60px;
 }
 .sendBox{
     width: 100%;
     display: flex;
+    justify-content: center;
 }
 .selected{
-    background-color: aqua;
+    background-color: rgb(19, 19, 19);
+}
+.cur{
+    color: aliceblue;
+}
+.titleNuevaCaja{
+    font-family: 'Cabinet Grotesk', sans-serif;
+    font-size: 2rem;
+    color: #2c1e23;
+}
+@media screen and (min-width: 768px){
+    .mainContainer{
+        display: flex;
+        align-items: center;
+        margin-top: 40px;
+    }
+    .monedaBox{
+        display: flex;
+    }
 }

@@ -4,7 +4,6 @@ import { useState, useContext } from 'react'
 import AuthContext from '../context/AuthContext'
 import {useNavigate} from 'react-router-dom'
 import toast, { Toaster} from 'react-hot-toast';
-import { Link } from 'react-router-dom'
 
 function CajaAhorros() {
 
@@ -43,22 +42,25 @@ function CajaAhorros() {
 
   return (
     <div className='mainContainer'>
-        <p>Elije la moneda que deseas en tu nueva cuenta</p>
-        <div className="monedaBox">
+        <img src="Money jar_Flatline.png" alt="" />
+       
+        <div className="todoBox">
+             <p className='titleNuevaCaja'>Elije la moneda que deseas en tu nueva cuenta</p>
+             <div className="monedaBox">
             <div className={`usd ${moneda == 'USD' && 'selected'}`} onClick={handleMonedaChange}>
-                <p>USD</p>
+                <p className='cur'>USD</p>
             </div>
             <div className={`eur ${moneda == 'EUR' && 'selected'}`} onClick={handleMonedaChange}>
-                <p>EUR</p>
+                <p className='cur'>EUR</p>
             </div>
             <div className={`ars ${moneda == 'ARS' && 'selected'}`} onClick={handleMonedaChange}>
-                <p>ARS</p>
+                <p className='cur'>ARS</p>
             </div>
         </div>
         <div className="sendBox">
-            <button onClick={createAccount} className='send'>send</button>
+            <button onClick={createAccount} className='send'>Abrir cuenta corriente</button>
         </div>
-        <Link className='link' to='/home'><button>Home</button></Link>
+        </div>
     </div>)}
 
 export default CajaAhorros
