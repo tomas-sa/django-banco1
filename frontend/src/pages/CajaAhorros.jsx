@@ -16,7 +16,6 @@ function CajaAhorros() {
 
     const handleMonedaChange = (e) => {
     setMoneda(e.target.textContent);
-    console.log(moneda);
   }
 
   let createAccount = async () => {

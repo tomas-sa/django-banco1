@@ -43,7 +43,13 @@
     background-color: transparent;
     text-align: center;
     font-size: 3rem;
-    color: #E23E57;
+    color: white;
+}
+.inputTransferir::placeholder{
+    color: white;
+}
+.inputTransferir:focus{
+    outline: none;
 }
 .transferirBoxInside{
     display: flex;
@@ -99,5 +105,11 @@
     }
     .mainContainer {
         margin-top: 9%;
+    }
+    .inputTransferir{
+        color: #E23E57;
+    }
+    .inputTransferir::placeholder{
+        color: #E23E57;
     }
 }

@@ -7,7 +7,7 @@
     background-color: #fd546d;
     border-radius: 20px;
     padding: 30px 10px;
-    height: 100vh;
+    height: 100%;
 }
 
 .infoBox{
@@ -84,6 +84,7 @@ p{
 .home{
     background-color: #F0F0F0;
     padding-top: 3%;
+    height: 102vh;
 }
 .datosBox{
     display: flex;
@@ -113,6 +114,8 @@ p{
     .backBox{
         border-radius: 0;
         padding: 50px 40px;
+        background-color: #fd546d;
+        min-height: 100vh;
     }
     .homeInter{
         position: fixed;

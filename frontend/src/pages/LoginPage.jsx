@@ -12,7 +12,9 @@ function LoginPage() {
   
   return (
     <div className='loginMain'>
-      <h1 className='titleLogin'>BankApp</h1>
+      <div className="titleBox">
+        <h1 className='titleLogin'>BankApp</h1>
+      </div>
         <div className="loginBox">
         <img className='imgLogin' src="Currency_Flatline.png" alt="" />
         <form className='form' onSubmit={loginUser}>

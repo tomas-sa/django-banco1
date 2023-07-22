@@ -38,8 +38,8 @@ function Transactions() {
   return (
     <div>
         <div className="backBox">
-          {transactions && <h2 className='transText'>Transactions</h2>}
-        {transactions ? transactions.map( trans => (
+          {transactions.length > 0 && <h2 className='transText'>Transactions</h2>}
+        {transactions.length  > 0 ? transactions.map( trans => (
           
           <div key={trans.id} className="transferBox">
             {trans.recibio === user.username ? <i className="flecha fa-solid fa-arrow-down"></i> : <i className="flecha fa-solid fa-arrow-up"></i>}
@@ -66,7 +66,7 @@ function Transactions() {
             </div>
           </div>
         )):
-        <h1 className='transText'>Your transactions will be here!</h1>
+        <h2 className='transText'>Your transactions <br /> will be here!</h2>
         }
       </div>
     </div>

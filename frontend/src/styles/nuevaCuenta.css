@@ -21,13 +21,14 @@
     justify-content: center;
 }
 .btn{
-    background-color: aliceblue;
+    background-color: rgb(246, 240, 255);
 }
 .selected{
-    background-color: rgba(19, 19, 19, 0.74);
+    background-color: rgba(167, 167, 167, 0.74);
 }
 .cur{
     color: black;
+    
 }
 .titleNuevaCaja{
     font-family: 'Cabinet Grotesk', sans-serif;
@@ -55,6 +56,10 @@
         color: aliceblue;
     }
     .cur{
+        color: aliceblue;
+    }
+    .selected {
+        background-color: rgba(19, 19, 19, 0.74);
         color: aliceblue;
     }
 }

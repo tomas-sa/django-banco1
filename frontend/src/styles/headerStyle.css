@@ -26,6 +26,9 @@
     font-weight: 400;
     gap: 10px;
 }
+.logoutBtn{
+    cursor: pointer;
+}
 @media screen and (min-width: 768px){
     .header{
         height: 60px;

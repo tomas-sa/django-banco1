@@ -81,7 +81,7 @@
     .input{
         color: #E23E57;
     }
-    input::placeholder {
+    .inputPrestamo::placeholder{
         color: #E23E57;
     }
 }

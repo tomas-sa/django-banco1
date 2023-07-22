@@ -93,7 +93,7 @@ function Prestamos() {
       </div>
       </div>
       <form className='formPrestamo' onSubmit={postPrestamos}>
-        <input required className='input' type="number" placeholder='$0' name='monto'/>
+        <input required className='input inputPrestamo' type="number" placeholder='$0' name='monto'/>
         {loadingIcon ? <FontAwesomeIcon className='rotate-icon' icon="fa-solid fa-spinner" />:
         <input className='submitPrestamo' type="submit"/>}
       </form>
