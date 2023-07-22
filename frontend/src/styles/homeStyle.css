@@ -1,23 +1,15 @@
 *{
     font-family: 'Satoshi', sans-serif;
     color: #1f1f1f;
+    box-sizing: border-box;
 }
 .backBox{
     background-color: #fd546d;
     border-radius: 20px;
     padding: 30px 10px;
+    height: 100vh;
 }
-.transferBox{
-    display: flex;
-    align-items: center;
-    font-size: 1rem;
-    font-weight: 800;
-    justify-content: space-around;
-    background-color: rgba(218, 218, 218, 0.9);
-    border-radius: 10px;
-    color: black;
-    margin-bottom: 10px;
-}
+
 .infoBox{
     display: flex;
     flex-direction: column;
@@ -91,7 +83,7 @@ p{
 }
 .home{
     background-color: #F0F0F0;
-    margin-top: 30px;
+    padding-top: 3%;
 }
 .datosBox{
     display: flex;
@@ -104,7 +96,15 @@ p{
 .flecha{
     font-size: 1.5rem;
 }
-@media screen and (min-width: 768px){
+.selectedCur{
+    background-color: #E23E57;
+    color: #F0F0F0;
+}
+.transText{
+    text-align: center;
+    color: #F0F0F0;
+}
+@media screen and (min-width: 950px){
     .transactionsComponent{
         position: absolute;
         top: 60px;

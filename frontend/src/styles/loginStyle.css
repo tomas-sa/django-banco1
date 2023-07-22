@@ -1,9 +1,10 @@
 body{
-    background-color: #e4e4e4;
+    background-color: #E34F89;
     color: aliceblue;
     font-size: 1.5rem;
     font-family: 'Roboto', sans-serif;
     font-weight: 200;
+    margin: 0;
 }
 .form{
     display: flex;
@@ -20,14 +21,12 @@ body{
 .inputLogin{
     font-size: 1.5rem;
     padding: 10px;
-    border-radius: 20px;
     border: none;
     margin-top: 30px;
 }
 .sendInput{
     width: 50%;
     padding: 10px 5px;
-    border-radius: 25px;
     margin: auto;
     margin-top: 50px;
     font-size: 1.3rem;
@@ -87,6 +86,7 @@ body{
         display: flex;
         align-items: center;
         padding-top: 0;
+        border-left: 1px solid grey;
     }
     .inputLogin{
         font-size: 1rem;
@@ -106,7 +106,10 @@ body{
         display: initial;
     }
     .titleLogin{
-        margin-top: 5%;
+        margin-top: 2%;
         margin-left: 3%;
+    }
+    body{
+        background-color: #ebebeb;
     }
 }

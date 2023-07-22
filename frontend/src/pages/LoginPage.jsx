@@ -11,7 +11,7 @@ function LoginPage() {
   let {loginUser, loadingIcon} = useContext(AuthContext)
   
   return (
-    <div>
+    <div className='loginMain'>
       <h1 className='titleLogin'>BankApp</h1>
         <div className="loginBox">
         <img className='imgLogin' src="Currency_Flatline.png" alt="" />

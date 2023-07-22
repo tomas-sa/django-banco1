@@ -15,11 +15,11 @@ function Transferir() {
 
   return (
     <div className='transMainBox'>
-        <img src="Moneytransfer_Monochromatic.png" alt="" />
+        <img className='imgTrans' src="Moneytransfer_Monochromatic.png" alt="" />
         {userATransferir ? (
             <div className="transferirBox">
                 <div className="transferirBoxInside">
-                    <p>transferir a {userATransferir}</p>
+                    <p className='texto'>transferir a {userATransferir}</p>
                     <form className='formTransferir' onSubmit={transferir}>
                         <input required className='inputTransferir' type="number" placeholder='$0' name='monto' />
                         {loadingIcon ? 
@@ -28,7 +28,7 @@ function Transferir() {
                         
                     </form>
                     <Link  className='link' to='/home'>
-                        <button onClick={handleHomeClick}>Home</button>
+                        <button className='homeBtn' onClick={handleHomeClick}>Home</button>
                     </Link>
                 </div>
             </div>
@@ -45,9 +45,11 @@ function Transferir() {
                         <FontAwesomeIcon className='rotate-icon' icon="fa-solid fa-spinner" />:
                         <button className='submitTransferir'>Enviar</button>}
                 </form>
-                <Link onClick={handleHomeClick} className='link' to='/home'>
-                    <button >Cancelar</button>
-                </Link>
+                <div className="cancelBox">
+                    <Link onClick={handleHomeClick} className='link' to='/home'>
+                        <button className='cancelBtn' >Cancelar</button>
+                    </Link>
+                </div>
                 
             </div>
         )

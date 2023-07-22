@@ -9,14 +9,14 @@ input:focus{
     outline: none;
 }
 input::placeholder{
-    color: #E23E57;
+    color: white;
 }
 .input{
     border: none;
     background-color: transparent;
     text-align: center;
     font-size: 3rem;
-    color: #E23E57;
+    color: white;
 }
 .submitPrestamo{
     width: 40%;
@@ -42,11 +42,17 @@ input::placeholder{
     align-items: center;
     margin-bottom: 40px;
 }
+.opcionesPrestamo>*{
+    color: #F6F6F6;
+}
 .imgNotes{
     display: none;
 }
 .selectCurr>*{
     cursor: pointer;
+}
+.assetsBox >*{
+    color: #F6F6F6;
 }
 @media screen and (min-width: 768px){
     .formPrestamo{
@@ -65,5 +71,17 @@ input::placeholder{
     .imgNotes{
         display: initial;
         width: 70%;
+    }
+    .assetsBox>* {
+        color: #1f1f1f;
+    }
+    .opcionesPrestamo>* {
+        color: #1f1f1f;
+    }
+    .input{
+        color: #E23E57;
+    }
+    input::placeholder {
+        color: #E23E57;
     }
 }

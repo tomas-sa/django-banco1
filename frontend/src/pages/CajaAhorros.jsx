@@ -45,15 +45,15 @@ function CajaAhorros() {
         <img className='money_jar' src="Money jar_Flatline.png" alt="" />
        
         <div className="todoBox">
-             <p className='titleNuevaCaja'>Elije la moneda que deseas en tu nueva cuenta</p>
+             <p className='texto titleNuevaCaja'>Elije la moneda que deseas en tu nueva cuenta</p>
              <div className="monedaBox">
-            <div className={`usd ${moneda == 'USD' && 'selected'}`} onClick={handleMonedaChange}>
+            <div className={`btn usd ${moneda == 'USD' && 'selected'}`} onClick={handleMonedaChange}>
                 <p className='cur'>USD</p>
             </div>
-            <div className={`eur ${moneda == 'EUR' && 'selected'}`} onClick={handleMonedaChange}>
+            <div className={`btn eur ${moneda == 'EUR' && 'selected'}`} onClick={handleMonedaChange}>
                 <p className='cur'>EUR</p>
             </div>
-            <div className={`ars ${moneda == 'ARS' && 'selected'}`} onClick={handleMonedaChange}>
+            <div className={`btn ars ${moneda == 'ARS' && 'selected'}`} onClick={handleMonedaChange}>
                 <p className='cur'>ARS</p>
             </div>
         </div>

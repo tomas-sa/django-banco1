@@ -20,11 +20,14 @@
     display: flex;
     justify-content: center;
 }
+.btn{
+    background-color: aliceblue;
+}
 .selected{
     background-color: rgba(19, 19, 19, 0.74);
 }
 .cur{
-    color: aliceblue;
+    color: black;
 }
 .titleNuevaCaja{
     font-family: 'Cabinet Grotesk', sans-serif;
@@ -46,5 +49,12 @@
     .money_jar{
         display: initial;
         width: 40%;
+    }
+    .btn{
+        background-color: #E34F89;
+        color: aliceblue;
+    }
+    .cur{
+        color: aliceblue;
     }
 }

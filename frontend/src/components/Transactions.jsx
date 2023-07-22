@@ -38,7 +38,8 @@ function Transactions() {
   return (
     <div>
         <div className="backBox">
-        {transactions.map( trans => (
+          {transactions && <h2 className='transText'>Transactions</h2>}
+        {transactions ? transactions.map( trans => (
           
           <div key={trans.id} className="transferBox">
             {trans.recibio === user.username ? <i className="flecha fa-solid fa-arrow-down"></i> : <i className="flecha fa-solid fa-arrow-up"></i>}
@@ -64,7 +65,9 @@ function Transactions() {
             <div className='trans'>{fechaFormater(trans.fecha)}</div>
             </div>
           </div>
-        ))}
+        )):
+        <h1 className='transText'>Your transactions will be here!</h1>
+        }
       </div>
     </div>
   )

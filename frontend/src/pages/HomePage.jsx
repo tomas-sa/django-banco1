@@ -40,6 +40,7 @@ function HomePage() {
       })
 
       setMonedasDisponibles(monedas)
+      
       if(primerCarga){
         setInformation(data[0])
         setPrimerCarga(false)
@@ -87,7 +88,7 @@ function HomePage() {
 
       <div className="selectMonedaBox">
         {monedasDisponibles.length > 0 && monedasDisponibles.map(moneda => (
-          <p key={moneda} onClick={cambiarMoneda}>{moneda}</p>
+          <p className={moneda === information.moneda &&`selectedCur`} key={moneda} onClick={cambiarMoneda}>{moneda}</p>
         ))}
       </div>
 
