@@ -76,7 +76,7 @@ function HomePage() {
         </div>
       {information ? (
         <div className='infoAccount'>
-          <p>Cuenta en <b>{information.moneda}</b></p>
+          <p>Account in <b>{information.moneda}</b></p>
           <div className="dineroBox">
             <h1>$ {information.dinero}</h1>
           </div>
@@ -93,22 +93,22 @@ function HomePage() {
       </div>
 
       <div className="opcionesBox">
-        <Link className='link' to='/prestamos'>
+        <Link className='link fondito' to='/prestamos'>
         <div className="prestamosBox opBox">
           <i className="fa-solid fa-piggy-bank"></i>
-          <p>Préstamos</p>
+          <p>New loan</p>
         </div>
         </Link>
-        <Link className='link' to='/transferir'>
+        <Link className='link fondito' to='/transferir'>
         <div className="transferenciasBox opBox">
           <i className="fa-solid fa-money-bill-transfer"></i>
-          <p>Transferir</p>
+          <p>Transfer to..</p>
         </div>
         </Link>
-        <Link className='link' to='/nuevacuenta'>
+        <Link className='link fondito' to='/nuevacuenta'>
         <div className="nuevaCuentaBox opBox">
           <i className="fa-solid fa-building-columns"></i>
-          <p>Abrir cuenta</p>
+          <p>New savings</p>
         </div>
         </Link>
       </div>

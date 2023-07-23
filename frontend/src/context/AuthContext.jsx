@@ -109,6 +109,7 @@ export const AuthProvider = ({children}) => {
 
 
     let logoutUser = () =>{
+        setMenuVisible(false)
         setAuthTokens(null)
         setUser(null)
         localStorage.removeItem('authTokens')

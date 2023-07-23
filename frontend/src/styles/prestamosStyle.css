@@ -19,12 +19,28 @@
     color: white;
 }
 .submitPrestamo{
-    width: 40%;
     margin: auto;
-    border-radius: 15px;
-    border: 1px grey solid;
-    padding: 5px;
+    border: 2px black solid;
+    padding: 5px 20px;
+    font-size: 2rem;
+    position: relative;
+    cursor: pointer;    
 }
+.submitPrestamo::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: #1f1f1f;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    transition: ease-in-out 0.2s;
+}
+.submitPrestamo:hover::before{
+    transform: translate(-5px, 5px);
+}
+
 .selectCurr{
     display: flex;
 }
@@ -44,15 +60,57 @@
 }
 .opcionesPrestamo>*{
     color: #F6F6F6;
+    font-size: 2.6rem;
 }
 .imgNotes{
     display: none;
 }
 .selectCurr>*{
     cursor: pointer;
+    border: 2px solid black;
+    font-weight: 400;
 }
 .assetsBox >*{
     color: #F6F6F6;
+    text-align: center;
+}
+.loanTitle{
+    background-color: #F6F6F6;
+    color: #1f1f1f;
+    border: 2px solid black;
+    padding: 5px 20px;
+    font-size: 3rem;
+    margin: 0;
+    margin: auto;
+    margin-top: 8%;
+    margin-bottom: 5%;
+    position: relative;
+    width: 80%;
+    
+    
+}
+.loanTitle::before{
+    content: '';
+    background-color: #1f1f1f;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -5;
+    left: -5px;
+}
+.infoLoan{
+    font-size: 2rem;
+    width: 70%;
+    margin: auto;
+    margin-bottom: 40px;
+}
+.inputPrestamo::placeholder {
+    font-size: 4rem;
+}
+
+.inputPrestamo {
+    padding: 20px 0px;
+    font-size: 4rem;
 }
 @media screen and (min-width: 768px){
     .formPrestamo{
@@ -77,11 +135,20 @@
     }
     .opcionesPrestamo>* {
         color: #1f1f1f;
+        font-size: 2rem;
     }
     .input{
         color: #E23E57;
     }
     .inputPrestamo::placeholder{
         color: #E23E57;
+        font-size: 4rem;
+    }
+    .inputPrestamo{
+        font-size: 4rem;
+    }
+    .infoLoan{
+        margin: 0;
+        font-size: 1.5rem;
     }
 }

@@ -13,7 +13,7 @@ function LoginPage() {
   return (
     <div className='loginMain'>
       <div className="titleBox">
-        <h1 className='titleLogin'>BankApp</h1>
+        <h1 className='titleLogin'>BANKAPP</h1>
       </div>
         <div className="loginBox">
         <img className='imgLogin' src="Currency_Flatline.png" alt="" />

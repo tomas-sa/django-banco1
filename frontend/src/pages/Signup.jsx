@@ -39,15 +39,14 @@ function Signup() {
 
   return (
     <div>
-        <h3>Abrir cuenta bancaria</h3>
-        <Link to='/login'> <button>Home</button> </Link>
+        <h3 className='signupTitle'>Create account</h3>
         <form className='signupForm' onSubmit={crearCuenta}>
-            <input name='first_name' type="text" placeholder='Name' />
-            <input name='username' type="text" placeholder='username' />
-            <input name='last_name' type="text" placeholder='Last name' />
-            <input name='email' type="text" placeholder='Email' />
-            <input name='password' type="text" placeholder='Password' />
-            <select name="currency" id="selected_currency">
+            <input required name='first_name' type="text" placeholder='Name' />
+            <input required name='username' type="text" placeholder='username' />
+            <input required name='last_name' type="text" placeholder='Last name' />
+            <input required name='email' type="text" placeholder='Email' />
+            <input required name='password' type="text" placeholder='Password' />
+            <select required name="currency" id="selected_currency">
                 <option value="">-select currency-</option>
                 <option value="USD">USD</option>
                 <option value="EUR">EUR</option>
@@ -55,6 +54,9 @@ function Signup() {
             </select>
             <input className='enviarSignup' type="submit"/>
         </form>
+        <div className="btnContainer">
+          <Link to='/login'> <button className='cancelBtn'>Cancel</button> </Link>
+        </div>
     </div>
   )
 }

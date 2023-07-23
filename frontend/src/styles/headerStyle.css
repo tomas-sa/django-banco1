@@ -9,7 +9,7 @@
     right: 0;
     height: 100vh;
     width: 50%;
-    z-index: 1;
+    z-index: 10;
     transition: right 0.3s ease;
 }
 .visible{
@@ -28,6 +28,25 @@
 }
 .logoutBtn{
     cursor: pointer;
+}
+.fa-x{
+    margin-left: 20px;
+    margin-top: 20px;
+    color: aliceblue;
+    border: 2px solid black;
+    padding:5px 10px;
+    background-color: #E34F89;
+}
+.menuHeaderFirst {
+    background-color: aliceblue;
+    border: 2px solid black;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.linkHome {
+    background-color: #E34F89;
+    padding: 5px 15px;
+    border: 2px solid black;
 }
 @media screen and (min-width: 768px){
     .header{
@@ -49,12 +68,6 @@
     .fa-x{
         display: none;
     }
-    .linkHome{
-        background-color: #E34F89;
-        padding: 5px 15px;
-        border-radius: 10px;
-        border: 1px solid #E34F89;
-    }
     .linkHome:hover{
         background-color: rgb(228, 228, 228);
         color: black;
@@ -64,4 +77,11 @@
         display: flex;
         gap: 30px;
     }
+    .menuHeaderFirst {
+        background-color: transparent;
+        border: none;
+        padding:0px 20px;
+        margin-bottom: 0px;
+    }
+    
 }

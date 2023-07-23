@@ -44,7 +44,7 @@ function CajaAhorros() {
         <img className='money_jar' src="Money jar_Flatline.png" alt="" />
        
         <div className="todoBox">
-             <p className='texto titleNuevaCaja'>Elije la moneda que deseas en tu nueva cuenta</p>
+             <p className='titleNuevaCaja'>Select new account currency</p>
              <div className="monedaBox">
             <div className={`btn usd ${moneda == 'USD' && 'selected'}`} onClick={handleMonedaChange}>
                 <p className='cur'>USD</p>
@@ -57,7 +57,7 @@ function CajaAhorros() {
             </div>
         </div>
         <div className="sendBox">
-            <button onClick={createAccount} className='send'>Abrir cuenta corriente</button>
+            <button onClick={createAccount} className='send'>Submit</button>
         </div>
         </div>
     </div>)}

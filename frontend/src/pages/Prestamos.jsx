@@ -78,13 +78,13 @@ function Prestamos() {
   return (
     <div className='prestamoBox'>
       <div className="assetsBox">
-        <h3>Prestamo disponible</h3>
-        <p>puedes pedir prestamos de hasta 10.000 <br /> en cada moneda para poder probar la app</p>
+        <h3 className='loanTitle'>Available loan</h3>
+        <p className='infoLoan'>You can get up to $ 10.000 <br /> in each currency to test the app</p>
         <img className='imgNotes' src="Bank note_Outline.png" alt="" />
       </div>
       <div className="prestamoBoxInter">
         <div className="opcionesPrestamo">
-        {seleccionado && <p>Moneda: <b>{seleccionado.moneda}</b></p>}
+        {seleccionado && <p>Currency: <b>{seleccionado.moneda}</b></p>}
       {seleccionado && <p className='disponiblePrestamo'>$ {seleccionado.prestamo}</p>}
       <div className="selectCurr">
         {monedas.length > 0 && monedas.map(x =>(
@@ -95,7 +95,7 @@ function Prestamos() {
       <form className='formPrestamo' onSubmit={postPrestamos}>
         <input required className='input inputPrestamo' type="number" placeholder='$0' name='monto'/>
         {loadingIcon ? <FontAwesomeIcon className='rotate-icon' icon="fa-solid fa-spinner" />:
-        <input className='submitPrestamo' type="submit"/>}
+        <button className='submitPrestamo'>Submit</button>}
       </form>
       </div>
     </div>

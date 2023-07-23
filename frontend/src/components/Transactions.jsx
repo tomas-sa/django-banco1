@@ -38,7 +38,7 @@ function Transactions() {
   return (
     <div>
         <div className="backBox">
-          {transactions.length > 0 && <h2 className='transText'>Transactions</h2>}
+          {transactions.length > 0 && <h2 className='transText'>TRANSACTIONS</h2>}
         {transactions.length  > 0 ? transactions.map( trans => (
           
           <div key={trans.id} className="transferBox">

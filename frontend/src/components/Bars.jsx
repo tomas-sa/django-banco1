@@ -5,9 +5,10 @@ import '../styles/barsStyle.css'
 
 function Bars() {
 
-    const {toggleMenu} = useContext(AuthContext)
+    const {toggleMenu, user} = useContext(AuthContext)
 
   return (
+    user &&
     <div className='barBox'>
         <i onClick={toggleMenu} className="fa-solid fa-bars-staggered"></i>
     </div>

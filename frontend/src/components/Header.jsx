@@ -16,7 +16,7 @@ function Header() {
       <i onClick={toggleMenu} className="fa-solid fa-x"></i>
       <div className="menuHeader">
         <div className="menuHeaderFirst">
-          {user && <p>Hello <b>{user.username}</b></p>}
+          {user && <p>HELLO <b>{user.username}</b></p>}
         {(Cbu && user ) && <p>CBU: {Cbu}</p>}
         </div>
         <div className="menuHeaderSecond">
